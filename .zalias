@@ -1,0 +1,5 @@
+# Navigation
+alias ..='../'
+alias ...='../..'
+alias .3='../../..'
+alias .4='../../../..'
