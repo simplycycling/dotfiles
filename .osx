@@ -1,0 +1,6 @@
+# Most of this stuff can be found at https://macos-defaults.com
+# Set dock icon size
+defaults write com.apple.dock "tilesize" -int "48" && killall Dock
+
+# Autohide dock
+defaults write com.apple.dock "autohide" -bool "true" && killall Dock
