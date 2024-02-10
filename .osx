@@ -4,3 +4,12 @@ defaults write com.apple.dock "tilesize" -int "48" && killall Dock
 
 # Autohide dock
 defaults write com.apple.dock "autohide" -bool "true" && killall Dock
+
+# Disable smart quotes as they’re annoying when typing code
+defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
+
+# Disable smart dashes as they’re annoying when typing code
+defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
+
+# Set background to my preferred background
+osascript -e 'tell application "Finder" to set desktop picture to POSIX file "/System/Library/Desktop Pictures/Ventura Graphic.heic"'
