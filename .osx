@@ -13,3 +13,8 @@ defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
 
 # Set background to my preferred background
 osascript -e 'tell application "Finder" to set desktop picture to POSIX file "/System/Library/Desktop Pictures/Ventura Graphic.heic"'
+
+# Set a blazingly fast keyboard repeat rate, and make it happen more quickly.
+# (The KeyRepeat option requires logging out and back in to take effect.)
+defaults write NSGlobalDomain InitialKeyRepeat -int 20
+defaults write NSGlobalDomain KeyRepeat -int 06
