@@ -1,20 +1,20 @@
 # Most of this stuff can be found at https://macos-defaults.com
 # Set dock icon size
-defaults write com.apple.dock "tilesize" -int "48" && killall Dock
+#defaults write com.apple.dock "tilesize" -int "48" && killall Dock
 
 # Autohide dock
-defaults write com.apple.dock "autohide" -bool "true" && killall Dock
+#defaults write com.apple.dock "autohide" -bool "true" && killall Dock
 
 # Disable smart quotes as they’re annoying when typing code
-defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
+#defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
 
 # Disable smart dashes as they’re annoying when typing code
-defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
+#defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
 
 # Set background to my preferred background
-osascript -e 'tell application "Finder" to set desktop picture to POSIX file "/System/Library/Desktop Pictures/Ventura Graphic.heic"'
+#osascript -e 'tell application "Finder" to set desktop picture to POSIX file "/System/Library/Desktop Pictures/Ventura Graphic.heic"'
 
 # Set a blazingly fast keyboard repeat rate, and make it happen more quickly.
 # (The KeyRepeat option requires logging out and back in to take effect.)
-defaults write NSGlobalDomain InitialKeyRepeat -int 20
-defaults write NSGlobalDomain KeyRepeat -int 03
+#defaults write NSGlobalDomain InitialKeyRepeat -int 20
+#defaults write NSGlobalDomain KeyRepeat -int 03
