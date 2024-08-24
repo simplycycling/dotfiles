@@ -1,0 +1,12 @@
+[user]
+	name = Roger Sherman
+	email = rsherman@linux.com
+	signingkey = ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQClc1Mqu2bd2zPxxqWx928VsNRHFiwxJlE79F3eHaGe2qymI+YDsEtA7EEbFeqvnUuF52tPxZUYJNBjUXmBZxhLJjHB7LE7/XWmY4fc+itUOf4kp0YXg1b6qTw6mkxx6Snh4aqJbWKlGh1yMXFJDa/mYE3ggyiXOL8D4u/PSjtD57T3IFOlCjL29B1FKMfflvusHPSO/CkkT/XAxOMySwoeKZ4sakJg4drtVChlC6nS+p3Q48KmW5gPoemxsqKzf8ysPzHKQIlMK0tjbZtHkv5KlTBEBIXHC4d7n1Lr/CFF1nHJCPW6yiU0ra8IJ3hP2Tsjnd5Ycdk1DxdaQbpZqQF7
+[init]
+	defaultBranch = main
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+[commit]
+	gpgsign = true
