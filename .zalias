@@ -1,8 +1,8 @@
 # Navigation
-alias ..='../'
-alias ...='../..'
-alias .3='../../..'
-alias .4='../../../..'
+alias ..='cd ../'
+alias ...='cd ../..'
+alias .3='cd ../../..'
+alias .4='cd ../../../..'
 
 # Git
 alias gs='git status'
