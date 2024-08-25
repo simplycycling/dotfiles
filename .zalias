@@ -8,3 +8,7 @@ alias .4='cd ../../../..'
 alias gs='git status'
 alias gp='git push'
 alias gcm='git commit -m '
+
+# System
+alias ll='ls -al'
+
