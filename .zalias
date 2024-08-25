@@ -3,3 +3,6 @@ alias ..='../'
 alias ...='../..'
 alias .3='../../..'
 alias .4='../../../..'
+
+# Git
+alias gp='git push'
