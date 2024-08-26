@@ -1,3 +1,4 @@
+# Lazygit has started working, for no reason whatsoever. Hurrah!
 return {
 	"kdheepak/lazygit.nvim",
 	cmd = {
