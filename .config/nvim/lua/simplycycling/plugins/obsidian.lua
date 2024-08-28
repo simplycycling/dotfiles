@@ -3,6 +3,11 @@ return {
 	version = "*",
 	lazy = true,
 	ft = "markdown",
+	config = function()
+		require("obsidian").setup({
+			dir = "~/Documents/notes/",
+		})
+	end,
 
 	dependencies = {
 		"nvim-lua/plenary.nvim",
@@ -11,17 +16,17 @@ return {
 		"nvim-treesitter/nvim-treesitter",
 	},
 
-	opts = {
-		workspaces = {
-			{
-				name = "personal",
-				path = "~/Documents/notes/",
-			},
-		},
+	-- opts = {
+	--	workspaces = {
+	--		{
+	--			name = "personal",
+	--			path = "~/Documents/notes/",
+	--		},
+	--	},
 
-		completion = {
-			nvim_cmp = true,
-			min_chars = 2,
-		},
-	},
+	--	completion = {
+	--		nvim_cmp = true,
+	--		min_chars = 2,
+	--	},
+	--},
 }
