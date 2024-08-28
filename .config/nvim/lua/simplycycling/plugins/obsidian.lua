@@ -9,7 +9,7 @@ return {
 		})
 	end,
 
-  vim.o.conceallevel = 2
+	--vim.o.conceallevel = 2,
 
 	dependencies = {
 		"nvim-lua/plenary.nvim",
