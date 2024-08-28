@@ -9,6 +9,8 @@ return {
 		})
 	end,
 
+  vim.o.conceallevel = 2
+
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"hrsh7th/nvim-cmp",
