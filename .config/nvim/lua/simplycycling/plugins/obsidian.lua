@@ -11,7 +11,7 @@ return {
 
 	dependencies = {
 		"nvim-lua/plenary.nvim",
-		"hrsh7ja/nvim-cmp",
+		"hrsh7th/nvim-cmp",
 		"nvim-telescope/telescope.nvim",
 		"nvim-treesitter/nvim-treesitter",
 	},
