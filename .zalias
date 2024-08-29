@@ -5,7 +5,7 @@ alias .3='cd ../../..'
 alias .4='cd ../../../..'
 
 # Git
-alias gs='git status'
+alias gst='git status'
 alias gp='git push'
 alias gcm='git commit -m '
 
