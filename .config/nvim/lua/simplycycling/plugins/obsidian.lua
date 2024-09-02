@@ -7,7 +7,7 @@ return {
 		require("obsidian").setup({
 			dir = "~/Documents/notes/",
 		})
-  vim.o.conceallevel = 2,
+		vim.o.conceallevel = 2
 	end,
 
 	dependencies = {
@@ -16,5 +16,4 @@ return {
 		"nvim-telescope/telescope.nvim",
 		"nvim-treesitter/nvim-treesitter",
 	},
-
 }
