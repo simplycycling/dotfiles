@@ -7,9 +7,8 @@ return {
 		require("obsidian").setup({
 			dir = "~/Documents/notes/",
 		})
-	end,
-
   vim.o.conceallevel = 2,
+	end,
 
 	dependencies = {
 		"nvim-lua/plenary.nvim",
