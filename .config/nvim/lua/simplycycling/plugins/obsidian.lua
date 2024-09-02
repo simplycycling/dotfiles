@@ -5,7 +5,7 @@ return {
 	ft = "markdown",
 	config = function()
 		require("obsidian").setup({
-			dir = "~/Documents/notes/",
+			dir = "~/Documents/notes/In/",
 		})
 		vim.o.conceallevel = 2
 	end,
