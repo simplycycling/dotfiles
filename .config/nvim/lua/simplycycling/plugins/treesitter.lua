@@ -34,9 +34,7 @@ return {
 				"vim",
 				"dockerfile",
 				"gitignore",
-				"query",
 				"vimdoc",
-				"c",
 				"ruby",
 			},
 			incremental_selection = {
