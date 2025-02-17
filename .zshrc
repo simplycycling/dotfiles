@@ -24,6 +24,8 @@ bindkey "^[[B" history-search-forward
 
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+export PATH=$PATH:/Users/rsherman/.iximiuz/labctl/bin
+source <(labctl completion zsh)
 
 alias ls="eza --color=always --long --icons=always --no-time"
 source ~/.zalias
