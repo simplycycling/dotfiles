@@ -11,4 +11,5 @@ alias gcm='git commit -m '
 
 # System
 alias ll='ls -al'
+alias python='python3'
 
