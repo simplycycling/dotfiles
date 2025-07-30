@@ -38,6 +38,8 @@ return {
 				"prismals",
 				"pyright",
 			},
+			-- auto-install configured servers (with lspconfig)
+			automatic_installation = true,
 		})
 
 		mason_tool_installer.setup({
