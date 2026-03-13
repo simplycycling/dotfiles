@@ -1,0 +1,13 @@
+{
+  "name": "devops-toolkit",
+  "owner": {
+    "name": "Roger"
+  },
+  "plugins": [
+    {
+      "name": "devops-toolkit",
+      "source": ".",
+      "description": "DevOps assistant for fintech infrastructure archaeology, GitOps migration, and multi-cloud operations"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "name": "devops-toolkit",
+  "version": "0.1.0",
+  "description": "DevOps assistant for fintech infrastructure archaeology, GitOps migration, and multi-cloud operations across AWS, Azure, Kubernetes, RDS, and Redshift",
+  "author": {
+    "name": "Roger"
+  },
+  "keywords": ["devops", "terraform", "kubernetes", "aws", "azure", "gitops", "ansible", "fintech"]
+}

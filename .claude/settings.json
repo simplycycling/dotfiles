@@ -1,0 +1,14 @@
+{
+  "alwaysThinkingEnabled": true,
+  "extraKnownMarketplaces": {
+    "local": {
+      "source": {
+        "source": "directory",
+        "path": "/Users/rsherman/.claude/plugins"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "devops-toolkit@local": true
+  }
+}
