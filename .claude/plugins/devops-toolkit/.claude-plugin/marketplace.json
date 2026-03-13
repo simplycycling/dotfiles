@@ -6,7 +6,7 @@
   "plugins": [
     {
       "name": "devops-toolkit",
-      "source": ".",
+      "source": "./",
       "description": "DevOps assistant for fintech infrastructure archaeology, GitOps migration, and multi-cloud operations"
     }
   ]
