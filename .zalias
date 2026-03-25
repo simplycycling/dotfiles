@@ -13,3 +13,6 @@ alias gcm='git commit -m '
 alias ll='ls -al'
 alias python='python3'
 
+# Lazy
+alias lzg='lazygit'
+alias lzd='lazydocker'
