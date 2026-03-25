@@ -1,0 +1,13 @@
+{
+  "name": "local",
+  "owner": {
+    "name": "Roger"
+  },
+  "plugins": [
+    {
+      "name": "devops-toolkit",
+      "source": "./devops-toolkit",
+      "description": "DevOps assistant for fintech infrastructure archaeology, GitOps migration, and multi-cloud operations across AWS, Azure, Kubernetes, RDS, and Redshift"
+    }
+  ]
+}
