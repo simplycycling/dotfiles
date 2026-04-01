@@ -16,3 +16,6 @@ alias python='python3'
 # Lazy
 alias lzg='lazygit'
 alias lzd='lazydocker'
+
+# Obsidian
+alias oo='cd ~/Documents/notes'
