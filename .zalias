@@ -21,4 +21,5 @@ alias lzd='lazydocker'
 
 # Obsidian
 alias oo='cd ~/Documents/notes'
+alias or='nvim ~/Documents/notes/Inbox/*.md'
 
