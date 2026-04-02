@@ -16,9 +16,7 @@ return {
 			templates = {
 				folder = "templates",
 			},
-			note_frontmatter_func = function()
-				return nil
-			end,
+			disable_frontmatter = true,
 		})
 		vim.o.conceallevel = 2
 	end,
