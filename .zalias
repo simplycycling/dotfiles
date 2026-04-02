@@ -3,6 +3,8 @@ alias ..='cd ../'
 alias ...='cd ../..'
 alias .3='cd ../../..'
 alias .4='cd ../../../..'
+alias dot='cd ~/src/dotfiles/'
+alias sa='cd ~/src/ansible/'
 
 # Git
 alias gst='git status'
