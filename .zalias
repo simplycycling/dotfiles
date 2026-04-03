@@ -20,6 +20,6 @@ alias lzg='lazygit'
 alias lzd='lazydocker'
 
 # Obsidian
-alias oo='cd ~/Documents/notes'
-alias or='nvim ~/Documents/notes/Inbox/*.md'
+alias oo='cd ~/Documents/simplycycling'
+alias or='nvim ~/Documents/simplycycling/Inbox/*.md'
 

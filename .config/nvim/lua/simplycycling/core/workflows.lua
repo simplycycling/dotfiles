@@ -29,10 +29,10 @@ end)
 -- must have cursor on title
 vim.keymap.set("n", "<leader>of", ":s/\\(# \\)[^_]*_/\\1/ | s/-/ /g<cr>")
 -- search for files in full vault
-vim.keymap.set("n", "<leader>os", ':Telescope find_files search_dirs={"/Users/rsherman/Documents/notes"}<cr>')
-vim.keymap.set("n", "<leader>oz", ':Telescope live_grep search_dirs={"/Users/rsherman/Documents/notes"}<cr>')
+vim.keymap.set("n", "<leader>os", ':Telescope find_files search_dirs={"/Users/rsherman/Documents/simplycycling"}<cr>')
+vim.keymap.set("n", "<leader>oz", ':Telescope live_grep search_dirs={"/Users/rsherman/Documents/simplycycling"}<cr>')
 -- for review workflow
 -- move file in current buffer to zettelkasten folder
-vim.keymap.set("n", "<leader>ok", ":!mv '%:p' /Users/rsherman/Documents/notes/zettelkasten<cr>:bd<cr>")
+vim.keymap.set("n", "<leader>ok", ":!mv '%:p' /Users/rsherman/Documents/simplycycling/zettelkasten<cr>:bd<cr>")
 -- delete file in current buffer
 vim.keymap.set("n", "<leader>odd", ":!rm '%:p'<cr>:bd<cr>")

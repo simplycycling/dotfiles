@@ -8,7 +8,7 @@ return {
 			workspaces = {
 				{
 					name = "notes",
-					path = "~/Documents/notes/",
+					path = "~/Documents/simplycycling/",
 				},
 			},
 			notes_subdir = "Inbox",

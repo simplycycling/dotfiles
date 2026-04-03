@@ -8,6 +8,6 @@ fi
 file_name=$(echo "$1" | tr ' ' '-')
 formatted_file_name=$(date "+%Y-%m-%d")_${file_name}.md
 # cd "/Users/rsherman/library/Mobile Documents/iCloud~md~obsidian/Documents/ZazenCodes" || exit
-cd "/Users/rsherman/Documents/notes" || exit
+cd "/Users/rsherman/Documents/simplycycling" || exit
 touch "Inbox/${formatted_file_name}"
 nvim "Inbox/${formatted_file_name}"
