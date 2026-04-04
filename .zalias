@@ -3,6 +3,7 @@ alias ..='cd ../'
 alias ...='cd ../..'
 alias .3='cd ../../..'
 alias .4='cd ../../../..'
+alias src='cd ~/src/'
 alias dot='cd ~/src/dotfiles/'
 alias sa='cd ~/src/ansible/'
 
