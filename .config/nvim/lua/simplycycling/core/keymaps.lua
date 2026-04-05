@@ -21,3 +21,12 @@ keymap.set("n", "<leader>tx", "<cmd>tabclose<CR>", { desc = "Close current tab" 
 keymap.set("n", "<leader>tn", "<cmd>tabn<CR>", { desc = "Go to next tab" })
 keymap.set("n", "<leader>tp", "<cmd>tabp<CR>", { desc = "Go to previous tab" })
 keymap.set("n", "<leader>tf", "<cmd>tabnew %<CR>", { desc = "Open current buffer in new tab" })
+
+-- move a block of text up/down with K/J in visual mode
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { silent = true })
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { silent = true })
+
+-- yank to clipboard
+vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
+-- yank line to clipboard
+vim.keymap.set("n", "<leader>Y", [["+Y]])
