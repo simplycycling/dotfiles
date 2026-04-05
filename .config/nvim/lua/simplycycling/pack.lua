@@ -411,25 +411,23 @@ vim.pack.add({ gh("windwp/nvim-ts-autotag") })
 -- TSUpdate build step is handled by the PackChanged hook at the top of this file
 vim.pack.add({ gh("nvim-treesitter/nvim-treesitter") })
 safe(function()
-  require("nvim-treesitter.configs").setup({
-    highlight = { enable = true },
-    indent = { enable = true },
-    autotag = { enable = true },
-    ensure_installed = {
-      "python", "json", "yaml", "html", "css",
-      "markdown", "markdown_inline", "bash", "lua",
-      "vim", "dockerfile", "gitignore", "vimdoc", "ruby",
-    },
-    incremental_selection = {
-      enable = true,
-      keymaps = {
-        init_selection = "<C-space>",
-        node_incremental = "<C-space>",
-        scope_incremental = false,
-        node_decremental = "<bs>",
-      },
-    },
+  -- New nvim-treesitter API: setup() only accepts install_dir
+  require("nvim-treesitter").setup()
+
+  -- Enable treesitter highlighting globally (replaces highlight = { enable = true })
+  vim.api.nvim_create_autocmd("FileType", {
+    callback = function(ev)
+      pcall(vim.treesitter.start, ev.buf)
+    end,
   })
+
+  -- Install parsers
+  require("nvim-treesitter").install({
+    "python", "json", "yaml", "html", "css",
+    "markdown", "markdown_inline", "bash", "lua",
+    "vim", "dockerfile", "gitignore", "vimdoc", "ruby",
+  })
+
 end)
 
 -- Diagnostics, quickfix, and todo list panel
