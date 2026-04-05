@@ -451,7 +451,7 @@ vim.pack.add({
   gh("hrsh7th/cmp-buffer"),
   gh("hrsh7th/cmp-path"),
   gh("hrsh7th/cmp-nvim-lsp"),
-  { src = gh("L3MON4D3/LuaSnip"), version = "v2.*" },
+  { src = gh("L3MON4D3/LuaSnip"), version = vim.version.range(">=2.0.0, <3.0.0") },
   gh("saadparwaiz1/cmp_luasnip"),
   gh("rafamadriz/friendly-snippets"),
   gh("onsails/lspkind.nvim"),
