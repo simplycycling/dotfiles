@@ -17,6 +17,15 @@ return {
 				folder = "templates",
 			},
 			disable_frontmatter = true,
+			mappings = {
+				-- follow markdown/wiki links
+				["gf"] = {
+					action = function()
+						return require("obsidian").util.gf_passthrough()
+					end,
+					opts = { noremap = false, expr = true, buffer = true },
+				},
+			},
 		})
 		vim.o.conceallevel = 2
 	end,
