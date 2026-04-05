@@ -3,6 +3,16 @@ local gh = function(x)
   return "https://github.com/" .. x
 end
 
+-- Wraps a setup block so a missing plugin warns but doesn't abort the file
+local safe = function(fn)
+  local ok, err = pcall(fn)
+  if not ok then
+    vim.schedule(function()
+      vim.notify("[pack.lua] " .. tostring(err), vim.log.levels.WARN)
+    end)
+  end
+end
+
 -- Build hooks: run make/update steps after install or update
 vim.api.nvim_create_autocmd("PackChanged", {
   callback = function(ev)
@@ -14,9 +24,9 @@ vim.api.nvim_create_autocmd("PackChanged", {
     end
 
     if name == "telescope-fzf-native.nvim" then
-      vim.system({ "make" }, { cwd = path })
+      vim.system({ "make" }, { cwd = path }):wait()
     elseif name == "LuaSnip" then
-      vim.system({ "make", "install_jsregexp" }, { cwd = path })
+      vim.system({ "make", "install_jsregexp" }, { cwd = path }):wait()
     elseif name == "nvim-treesitter" then
       if ev.data.active then
         vim.cmd("TSUpdate")
@@ -40,7 +50,7 @@ vim.pack.add({ gh("nvim-tree/nvim-web-devicons") })
 
 -- Colorscheme (load first so it's available for everything below)
 vim.pack.add({ gh("folke/tokyonight.nvim") })
-do
+safe(function()
   local bg = "#011628"
   local bg_dark = "#011423"
   local bg_highlight = "#143652"
@@ -77,11 +87,11 @@ do
     end,
   })
   vim.cmd([[colorscheme tokyonight]])
-end
+end)
 
 -- Statusline
 vim.pack.add({ gh("nvim-lualine/lualine.nvim") })
-do
+safe(function()
   local colors = {
     blue = "#65D1FF",
     green = "#3EFFDC",
@@ -127,9 +137,7 @@ do
   }
 
   require("lualine").setup({
-    options = {
-      theme = my_lualine_theme,
-    },
+    options = { theme = my_lualine_theme },
     sections = {
       lualine_x = {
         { "encoding" },
@@ -138,26 +146,28 @@ do
       },
     },
   })
-end
+end)
 
 -- Bufferline (tabs)
 vim.pack.add({ gh("akinsho/bufferline.nvim") })
-require("bufferline").setup({
-  options = {
-    mode = "tabs",
-    separator_style = "slant",
-  },
-})
+safe(function()
+  require("bufferline").setup({
+    options = {
+      mode = "tabs",
+      separator_style = "slant",
+    },
+  })
+end)
 
 -- Indent guides
 vim.pack.add({ gh("lukas-reineke/indent-blankline.nvim") })
-require("ibl").setup({
-  indent = { char = "┊" },
-})
+safe(function()
+  require("ibl").setup({ indent = { char = "┊" } })
+end)
 
 -- Dashboard / start screen
 vim.pack.add({ gh("goolord/alpha-nvim") })
-do
+safe(function()
   local alpha = require("alpha")
   local dashboard = require("alpha.themes.dashboard")
 
@@ -183,24 +193,28 @@ do
 
   alpha.setup(dashboard.opts)
   vim.cmd([[autocmd FileType alpha setlocal nofoldenable]])
-end
+end)
 
 -- ── Editor Utilities ──────────────────────────────────────────────────────────
 
 -- Surround motions (ys, cs, ds)
 vim.pack.add({ gh("kylechui/nvim-surround") })
-require("nvim-surround").setup()
+safe(function()
+  require("nvim-surround").setup()
+end)
 
 -- Auto-close pairs
 vim.pack.add({ gh("windwp/nvim-autopairs") })
-require("nvim-autopairs").setup({
-  check_ts = true,
-  ts_config = {
-    lua = { "string" },
-    javascript = { "template_string" },
-    java = false,
-  },
-})
+safe(function()
+  require("nvim-autopairs").setup({
+    check_ts = true,
+    ts_config = {
+      lua = { "string" },
+      javascript = { "template_string" },
+      java = false,
+    },
+  })
+end)
 -- Wire autopairs into cmp once cmp is available (cmp added in completion group)
 vim.api.nvim_create_autocmd("VimEnter", {
   once = true,
@@ -214,34 +228,38 @@ vim.api.nvim_create_autocmd("VimEnter", {
 
 -- Substitute operator (s, ss, S)
 vim.pack.add({ gh("gbprod/substitute.nvim") })
-do
+safe(function()
   local substitute = require("substitute")
   substitute.setup()
   vim.keymap.set("n", "s", substitute.operator, { desc = "Substitute with motion" })
   vim.keymap.set("n", "ss", substitute.line, { desc = "Substitute line" })
   vim.keymap.set("n", "S", substitute.eol, { desc = "Substitute to end of line" })
   vim.keymap.set("x", "s", substitute.visual, { desc = "Substitute in visual mode" })
-end
+end)
 
 -- Commenting (with treesitter-aware context)
 vim.pack.add({ gh("JoosepAlviste/nvim-ts-context-commentstring") })
 vim.pack.add({ gh("numToStr/Comment.nvim") })
-do
+safe(function()
   require("ts_context_commentstring").setup({ enable_autocmd = false })
   require("Comment").setup({
     pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
   })
-end
+end)
 
 -- Keybinding hints
 vim.o.timeout = true
 vim.o.timeoutlen = 500
 vim.pack.add({ gh("folke/which-key.nvim") })
-require("which-key").setup()
+safe(function()
+  require("which-key").setup()
+end)
 
 -- Better vim.ui.select / vim.ui.input
 vim.pack.add({ gh("stevearc/dressing.nvim") })
-require("dressing").setup()
+safe(function()
+  require("dressing").setup()
+end)
 
 -- Maximize/restore splits
 vim.pack.add({ gh("szw/vim-maximizer") })
@@ -251,7 +269,7 @@ vim.keymap.set("n", "<leader>sm", "<cmd>MaximizerToggle<CR>", { desc = "Maximize
 
 -- File explorer
 vim.pack.add({ gh("nvim-tree/nvim-tree.lua") })
-do
+safe(function()
   vim.g.loaded_netrw = 1
   vim.g.loaded_netrwPlugin = 1
 
@@ -285,14 +303,14 @@ do
   keymap.set("n", "<leader>ef", "<cmd>NvimTreeFindFileToggle<CR>", { desc = "Toggle file explorer on current file" })
   keymap.set("n", "<leader>ec", "<cmd>NvimTreeCollapse<CR>", { desc = "Collapse file explorer" })
   keymap.set("n", "<leader>er", "<cmd>NvimTreeRefresh<CR>", { desc = "Refresh file explorer" })
-end
+end)
 
 -- Fuzzy finder (fzf-native has a make build step, handled by PackChanged hook)
 vim.pack.add({
   gh("nvim-telescope/telescope.nvim"),
   { src = gh("nvim-telescope/telescope-fzf-native.nvim"), version = "main" },
 })
-do
+safe(function()
   local telescope = require("telescope")
   local actions = require("telescope.actions")
 
@@ -309,7 +327,10 @@ do
     },
   })
 
-  telescope.load_extension("fzf")
+  local fzf_lib = vim.fn.stdpath("data") .. "/site/pack/core/opt/telescope-fzf-native.nvim/build/libfzf.so"
+  if vim.uv.fs_stat(fzf_lib) then
+    telescope.load_extension("fzf")
+  end
 
   local keymap = vim.keymap
   keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Fuzzy find files in cwd" })
@@ -317,51 +338,53 @@ do
   keymap.set("n", "<leader>fs", "<cmd>Telescope live_grep<cr>", { desc = "Find string in cwd" })
   keymap.set("n", "<leader>fc", "<cmd>Telescope grep_string<cr>", { desc = "Find string under cursor in cwd" })
   keymap.set("n", "<leader>ft", "<cmd>TodoTelescope<cr>", { desc = "Find todos" })
-end
+end)
 
 -- Todo comment highlights and navigation
 vim.pack.add({ gh("folke/todo-comments.nvim") })
-do
+safe(function()
   local todo_comments = require("todo-comments")
   vim.keymap.set("n", "]t", function() todo_comments.jump_next() end, { desc = "Next todo comment" })
   vim.keymap.set("n", "[t", function() todo_comments.jump_prev() end, { desc = "Previous todo comment" })
   todo_comments.setup()
-end
+end)
 
 -- ── Git ───────────────────────────────────────────────────────────────────────
 
 -- Git signs in the gutter
 vim.pack.add({ gh("lewis6991/gitsigns.nvim") })
-require("gitsigns").setup({
-  on_attach = function(bufnr)
-    local gs = package.loaded.gitsigns
+safe(function()
+  require("gitsigns").setup({
+    on_attach = function(bufnr)
+      local gs = package.loaded.gitsigns
 
-    local function map(mode, l, r, desc)
-      vim.keymap.set(mode, l, r, { buffer = bufnr, desc = desc })
-    end
+      local function map(mode, l, r, desc)
+        vim.keymap.set(mode, l, r, { buffer = bufnr, desc = desc })
+      end
 
-    map("n", "]h", gs.next_hunk, "Next Hunk")
-    map("n", "[h", gs.prev_hunk, "Prev Hunk")
+      map("n", "]h", gs.next_hunk, "Next Hunk")
+      map("n", "[h", gs.prev_hunk, "Prev Hunk")
 
-    map("n", "<leader>hs", gs.stage_hunk, "Stage hunk")
-    map("n", "<leader>hr", gs.reset_hunk, "Reset hunk")
-    map("v", "<leader>hs", function() gs.stage_hunk({ vim.fn.line("."), vim.fn.line("v") }) end, "Stage hunk")
-    map("v", "<leader>hr", function() gs.reset_hunk({ vim.fn.line("."), vim.fn.line("v") }) end, "Reset hunk")
+      map("n", "<leader>hs", gs.stage_hunk, "Stage hunk")
+      map("n", "<leader>hr", gs.reset_hunk, "Reset hunk")
+      map("v", "<leader>hs", function() gs.stage_hunk({ vim.fn.line("."), vim.fn.line("v") }) end, "Stage hunk")
+      map("v", "<leader>hr", function() gs.reset_hunk({ vim.fn.line("."), vim.fn.line("v") }) end, "Reset hunk")
 
-    map("n", "<leader>hS", gs.stage_buffer, "Stage buffer")
-    map("n", "<leader>hR", gs.reset_buffer, "Reset buffer")
-    map("n", "<leader>hu", gs.undo_stage_hunk, "Undo stage hunk")
-    map("n", "<leader>hp", gs.preview_hunk, "Preview hunk")
+      map("n", "<leader>hS", gs.stage_buffer, "Stage buffer")
+      map("n", "<leader>hR", gs.reset_buffer, "Reset buffer")
+      map("n", "<leader>hu", gs.undo_stage_hunk, "Undo stage hunk")
+      map("n", "<leader>hp", gs.preview_hunk, "Preview hunk")
 
-    map("n", "<leader>hb", function() gs.blame_line({ full = true }) end, "Blame line")
-    map("n", "<leader>hB", gs.toggle_current_line_blame, "Toggle line blame")
+      map("n", "<leader>hb", function() gs.blame_line({ full = true }) end, "Blame line")
+      map("n", "<leader>hB", gs.toggle_current_line_blame, "Toggle line blame")
 
-    map("n", "<leader>hd", gs.diffthis, "Diff this")
-    map("n", "<leader>hD", function() gs.diffthis("~") end, "Diff this ~")
+      map("n", "<leader>hd", gs.diffthis, "Diff this")
+      map("n", "<leader>hD", function() gs.diffthis("~") end, "Diff this ~")
 
-    map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "Gitsigns select hunk")
-  end,
-})
+      map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "Gitsigns select hunk")
+    end,
+  })
+end)
 
 -- Lazygit integration
 vim.pack.add({ gh("kdheepak/lazygit.nvim") })
@@ -370,7 +393,7 @@ vim.keymap.set("n", "<leader>lg", "<cmd>LazyGit<cr>", { desc = "Open lazy git" }
 -- ── Sessions ──────────────────────────────────────────────────────────────────
 
 vim.pack.add({ gh("rmagatti/auto-session") })
-do
+safe(function()
   require("auto-session").setup({
     auto_restore_enabled = false,
     auto_session_suppress_dirs = { "~/", "~/src", "~/Downloads", "~/Documents", "~/Desktop" },
@@ -378,7 +401,7 @@ do
 
   vim.keymap.set("n", "<leader>wr", "<cmd>SessionRestore<CR>", { desc = "Restore session for cwd" })
   vim.keymap.set("n", "<leader>ws", "<cmd>SessionSave<CR>", { desc = "Save session for auto session root dir" })
-end
+end)
 
 -- ── Treesitter ────────────────────────────────────────────────────────────────
 
@@ -387,29 +410,31 @@ vim.pack.add({ gh("windwp/nvim-ts-autotag") })
 
 -- TSUpdate build step is handled by the PackChanged hook at the top of this file
 vim.pack.add({ gh("nvim-treesitter/nvim-treesitter") })
-require("nvim-treesitter.configs").setup({
-  highlight = { enable = true },
-  indent = { enable = true },
-  autotag = { enable = true },
-  ensure_installed = {
-    "python", "json", "yaml", "html", "css",
-    "markdown", "markdown_inline", "bash", "lua",
-    "vim", "dockerfile", "gitignore", "vimdoc", "ruby",
-  },
-  incremental_selection = {
-    enable = true,
-    keymaps = {
-      init_selection = "<C-space>",
-      node_incremental = "<C-space>",
-      scope_incremental = false,
-      node_decremental = "<bs>",
+safe(function()
+  require("nvim-treesitter.configs").setup({
+    highlight = { enable = true },
+    indent = { enable = true },
+    autotag = { enable = true },
+    ensure_installed = {
+      "python", "json", "yaml", "html", "css",
+      "markdown", "markdown_inline", "bash", "lua",
+      "vim", "dockerfile", "gitignore", "vimdoc", "ruby",
     },
-  },
-})
+    incremental_selection = {
+      enable = true,
+      keymaps = {
+        init_selection = "<C-space>",
+        node_incremental = "<C-space>",
+        scope_incremental = false,
+        node_decremental = "<bs>",
+      },
+    },
+  })
+end)
 
 -- Diagnostics, quickfix, and todo list panel
 vim.pack.add({ gh("folke/trouble.nvim") })
-do
+safe(function()
   require("trouble").setup({ focus = true })
 
   local keymap = vim.keymap
@@ -418,7 +443,7 @@ do
   keymap.set("n", "<leader>xq", "<cmd>Trouble quickfix toggle<CR>", { desc = "Open trouble quickfix list" })
   keymap.set("n", "<leader>xl", "<cmd>Trouble loclist toggle<CR>", { desc = "Open trouble location list" })
   keymap.set("n", "<leader>xt", "<cmd>Trouble todo toggle<CR>", { desc = "Open todos in trouble" })
-end
+end)
 
 -- ── Completion ────────────────────────────────────────────────────────────────
 
@@ -433,7 +458,7 @@ vim.pack.add({
   gh("rafamadriz/friendly-snippets"),
   gh("onsails/lspkind.nvim"),
 })
-do
+safe(function()
   local cmp = require("cmp")
   local luasnip = require("luasnip")
   local lspkind = require("lspkind")
@@ -471,7 +496,7 @@ do
       }),
     },
   })
-end
+end)
 
 -- ── LSP ───────────────────────────────────────────────────────────────────────
 
@@ -481,7 +506,7 @@ vim.pack.add({
   gh("williamboman/mason-lspconfig.nvim"),
   gh("WhoIsSethDaniel/mason-tool-installer.nvim"),
 })
-do
+safe(function()
   require("mason").setup({
     ui = {
       icons = {
@@ -505,7 +530,7 @@ do
       "prettier", "stylua", "isort", "black", "pylint", "eslint_d",
     },
   })
-end
+end)
 
 -- LSP configuration
 vim.pack.add({
@@ -513,7 +538,7 @@ vim.pack.add({
   gh("antosha417/nvim-lsp-file-operations"),
   gh("folke/neodev.nvim"),
 })
-do
+safe(function()
   require("neodev").setup()
   require("nvim-lsp-file-operations").setup()
 
@@ -600,11 +625,11 @@ do
       },
     },
   }))
-end
+end)
 
 -- Formatting
 vim.pack.add({ gh("stevearc/conform.nvim") })
-do
+safe(function()
   require("conform").setup({
     formatters_by_ft = {
       javascript = { "prettier" },
@@ -631,11 +656,11 @@ do
   vim.keymap.set({ "n", "v" }, "<leader>mp", function()
     require("conform").format({ lsp_fallback = true, async = false, timeout_ms = 1000 })
   end, { desc = "Format file or range (in visual mode)" })
-end
+end)
 
 -- Linting
 vim.pack.add({ gh("mfussenegger/nvim-lint") })
-do
+safe(function()
   local lint = require("lint")
 
   lint.linters_by_ft = {
@@ -654,31 +679,33 @@ do
   })
 
   vim.keymap.set("n", "<leader>l", function() lint.try_lint() end, { desc = "Trigger linting for current file" })
-end
+end)
 
 -- ── Obsidian ──────────────────────────────────────────────────────────────────
 
 vim.pack.add({ gh("epwalsh/obsidian.nvim") })
-require("obsidian").setup({
-  workspaces = {
-    {
-      name = "notes",
-      path = "~/Documents/simplycycling/",
+safe(function()
+  require("obsidian").setup({
+    workspaces = {
+      {
+        name = "notes",
+        path = "~/Documents/simplycycling/",
+      },
     },
-  },
-  notes_subdir = "Inbox",
-  new_notes_location = "notes_subdir",
-  templates = {
-    folder = "templates",
-  },
-  disable_frontmatter = true,
-  mappings = {
-    ["gf"] = {
-      action = function()
-        return require("obsidian").util.gf_passthrough()
-      end,
-      opts = { noremap = false, expr = true, buffer = true },
+    notes_subdir = "Inbox",
+    new_notes_location = "notes_subdir",
+    templates = {
+      folder = "templates",
     },
-  },
-})
-vim.o.conceallevel = 2
+    disable_frontmatter = true,
+    mappings = {
+      ["gf"] = {
+        action = function()
+          return require("obsidian").util.gf_passthrough()
+        end,
+        opts = { noremap = false, expr = true, buffer = true },
+      },
+    },
+  })
+  vim.o.conceallevel = 2
+end)
