@@ -538,7 +538,7 @@ vim.pack.add({
 })
 safe(function()
   require("neodev").setup()
-  require("nvim-lsp-file-operations").setup()
+  require("lsp-file-operations").setup()
 
   local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
