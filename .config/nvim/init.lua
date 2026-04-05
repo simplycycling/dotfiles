@@ -1,2 +1,2 @@
 require("simplycycling.core")
-require("simplycycling.lazy")
+require("simplycycling.pack")
