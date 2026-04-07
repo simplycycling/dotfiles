@@ -765,6 +765,7 @@ safe(function()
 				opts = { noremap = false, expr = true, buffer = true },
 			},
 		},
+		ui = { enable = false },
 	})
 	vim.o.conceallevel = 2
 end)
