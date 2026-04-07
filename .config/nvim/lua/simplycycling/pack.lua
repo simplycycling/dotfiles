@@ -769,7 +769,7 @@ safe(function()
 	vim.o.conceallevel = 2
 end)
 
--- ── Markdown Renederer ───────────────────────────────────────────────────────
+-- ── Markdown Renderer ───────────────────────────────────────────────────────
 vim.pack.add({
 	"https://github.com/nvim-treesitter/nvim-treesitter",
 	"https://github.com/nvim-mini/mini.nvim", -- if you use the mini.nvim suite
