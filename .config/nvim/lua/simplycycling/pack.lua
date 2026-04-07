@@ -767,7 +767,6 @@ safe(function()
 		},
 		ui = { enable = false },
 	})
-	vim.o.conceallevel = 2
 end)
 
 -- ── Markdown Renderer ───────────────────────────────────────────────────────
