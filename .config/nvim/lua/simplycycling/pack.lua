@@ -769,6 +769,13 @@ safe(function()
 	})
 end)
 
+-- ── Obsidian Preview ──────────────────────────────────────────────────────────
+
+vim.pack.add({ gh("simplycycling/obsidian-preview.nvim") })
+safe(function()
+	require("obsidian_preview").setup()
+end)
+
 -- ── Markdown Renderer ───────────────────────────────────────────────────────
 vim.pack.add({
 	"https://github.com/nvim-treesitter/nvim-treesitter",
