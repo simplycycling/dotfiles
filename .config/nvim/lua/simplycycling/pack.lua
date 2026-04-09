@@ -23,7 +23,10 @@ vim.api.nvim_create_autocmd("PackChanged", {
 			return
 		end
 
-		if name == "telescope-fzf-native.nvim" then
+		if name == "obsidian-preview.nvim" then
+			-- vim.pack clones in detached HEAD; check out main so future updates work
+			vim.system({ "git", "checkout", "main" }, { cwd = path }):wait()
+		elseif name == "telescope-fzf-native.nvim" then
 			vim.system({ "make" }, { cwd = path }):wait()
 		elseif name == "LuaSnip" then
 			vim.system({ "make", "install_jsregexp" }, { cwd = path }):wait()
