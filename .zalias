@@ -14,6 +14,7 @@ alias gcm='git commit -m '
 
 # System
 alias ll='ls -al'
+alias ez='eza --tree --level=2'
 alias python='python3'
 
 # Lazy
