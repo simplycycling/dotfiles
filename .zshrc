@@ -27,9 +27,10 @@ compinit
 
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-export PATH=$PATH:/Users/rsherman/.iximiuz/labctl/bin
-export PATH=/opt/homebrew/opt/libpq/bin:$PATH
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 export PATH="$PATH:$HOME/bin"
+export PATH="$PATH:$HOME/.iximiuz/labctl/bin"
 source <(labctl completion zsh)
 
 alias ls="eza --color=always --long --icons=always --no-time"
