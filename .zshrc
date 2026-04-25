@@ -6,11 +6,6 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
 # history setup
 HISTFILE=$HOME/.zhistory
 SAVEHIST=1000
@@ -25,13 +20,10 @@ bindkey "^[[B" history-search-forward
 autoload -Uz compinit
 compinit
 
-source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 export PATH="$HOME/.local/bin:$PATH"
-export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 export PATH="$PATH:$HOME/bin"
-export PATH="$PATH:$HOME/.iximiuz/labctl/bin"
-source <(labctl completion zsh)
 
 alias ls="eza --color=always --long --icons=always --no-time"
 source ~/.zalias
+
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local

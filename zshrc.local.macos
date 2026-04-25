@@ -1,0 +1,9 @@
+source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+export PATH="$PATH:$HOME/.iximiuz/labctl/bin"
+command -v labctl &>/dev/null && source <(labctl completion zsh)
