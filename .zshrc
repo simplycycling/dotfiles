@@ -25,5 +25,6 @@ export PATH="$PATH:$HOME/bin"
 
 alias ls="eza --color=always --long --icons=always --no-time"
 source ~/.zalias
+source ~/.zfunctions
 
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local

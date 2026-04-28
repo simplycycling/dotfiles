@@ -1,0 +1,19 @@
+sandbox() {
+  podman run \
+    --rm \
+    -it \
+    --network=none \
+    --cap-drop=ALL \
+    --security-opt=no-new-privileges \
+    --security-opt=label=disable \
+    --userns=keep-id \
+    --pids-limit=256 \
+    --memory=512m \
+    --read-only \
+    --tmpfs /tmp:size=64m \
+    --tmpfs /root:size=32m \
+    -v "$(pwd)":/workspace:z \
+    -w /workspace \
+    node:20-slim \
+    bash
+}
