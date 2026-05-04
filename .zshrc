@@ -22,6 +22,7 @@ compinit
 
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$PATH:$HOME/bin"
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 alias ls="eza --color=always --long --icons=always --no-time"
 source ~/.zalias
