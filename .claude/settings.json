@@ -10,5 +10,18 @@
   },
   "enabledPlugins": {
     "devops-toolkit@local": true
+  },
+  "permissions": {
+    "deny": [
+      "Bash(git push:*)",
+      "Bash(git reset:*)",
+      "Bash(git rebase:*)",
+      "Bash(git clean:*)",
+      "Bash(git rm:*)",
+      "Bash(git restore:*)",
+      "Bash(git revert:*)",
+      "Bash(git branch -:*)",
+      "Bash(git worktree remove:*)"
+    ]
   }
 }
