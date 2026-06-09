@@ -1,5 +1,23 @@
 # dotfiles
 
+## New Mac setup
+
+1. Install [Homebrew](https://brew.sh)
+2. Clone this repo and the ansible repo
+3. Run `brew bundle` from this repo to install all packages:
+   ```sh
+   brew bundle
+   ```
+4. Install tmux plugins — start tmux, then press `Ctrl+b I`
+5. Install TPM (tmux plugin manager) if not already present:
+   ```sh
+   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+   ```
+6. Run the Ansible playbook to symlink dotfiles:
+   ```sh
+   cd ~/src/ansible && ansible-playbook runit.yml
+   ```
+
 ## Apps covered
 
 **Shell & Prompt**
@@ -33,7 +51,6 @@
 
 **Kubernetes**
 - **krew** — PATH export in `.zshrc`
-- **labctl** (iximiuz Labs CLI) — PATH + completion in `zshrc.local.macos`
 
 **System Monitoring**
 - **htop** — `.config/htop/htoprc`
